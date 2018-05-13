@@ -12,4 +12,7 @@ node('linux') {
 	stage('Deploy') {
 	    sh 'aws s3 cp /workspace/java-pipeline/dist/rectangle-${BUILD_NUMBER}.jar s3://prerana-jenkins/jenkins/'
 	}
+	stage('Report') {
+		sh 'aws cloudformation describe-stack-resources --region us-east-1 --stack-name jenkins'
+	}
 }
